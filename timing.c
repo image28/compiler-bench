@@ -234,13 +234,17 @@ void website(char *compiler[], int compilers, char *flag[], int flags)
         {
              printf("<H2><A HREF=\"#%s\">%s</A></H2>",flag[e],flag[e]);
              printf("<B><IMG SRC=\"%s.png\">%s</A></B>",graphfile[e],graphfile[e]);
-             printf("<P><B><!--#include file=\"%s.html\" --></B></P>",datafile[e],datafile[e]);
+             printf("<P><B><!--#include file=\"%s.html\" --></B></P>",datafile[e]);
         }
         
     }
 
     // FOOT
-    printf("<FOOTER>Author: Kevin Macey</FOOTER></BODY></HTML>");
+    printf("<FOOTER><CENTER>\
+            Author: Kevin Macey<BR>
+            <!--#flastmod virtual="index.html" --> \
+            <!--#fsize file="index.html" --><BR>\
+            </CENTER></FOOTER></BODY></HTML>");
     #endif
 
 }
