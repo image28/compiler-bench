@@ -8,8 +8,8 @@ Work in progress ( started ~7th-8th August 2020 )
 <B>Compile options</B><BR>
 <TABLE>
 <UL>
-<TR>-<TD><LI>-DGRAPH</TD><TD>enable generation of website</LI></TD></TR>
-<TR>-<TD><LI>-DGRAPH</TD><TD>enable generation of graph</LI></TD></TR>
+<TR>-<TD><LI>-DWEBSITE</TD><TD>enable generation of website</LI></TD></TR>
+<TR>-<TD><LI>-DPRINTSITE</TD><TD>print the website to stdout</LI></TD></TR>
 <TR>-<TD><LI>-DCOMPILER</TD><TD>set the compiler to test (e.g gcc,g++)</LI></TD></TR>
 <TR>-<TD><LI>-DMAIN</TD><TD>include the main function</LI></TD></TR>
 <TR>-<TD><LI>-DTIMESTAMP</TD><TD>include the timestamp function</LI></TD></TR>
