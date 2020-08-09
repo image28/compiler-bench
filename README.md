@@ -18,6 +18,7 @@ Work in progress ( started ~7th-8th August 2020 )
 <TR>-<TD><LI>-DAVXMATH</TD><TD>include the avx math functions function</LI></TD></TR>
 <TR>-<TD><LI>-DINFO</TD><TD>print info outside of the main loop</LI></TD></TR>
 <TR>-<TD><LI>-DBENCH</TD><TD>include the benchmark function</LI></TD></TR>
+<TR>-<TD><LI>-DDEBUG</TD><TD>whats going wrong, printing pointer address instead of value!!!</LI></TD></TR>
 <TR>-<TD><LI>-DCOMPILE</TD><TD>compile ( recompile if compiler flag is present )</LI></TD></TR>
 </UL>
 </TABLE>
