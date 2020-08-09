@@ -205,6 +205,48 @@ void plotline()
 }*/
 #endif
 
+#ifdef WEBSITE
+void website(char *compiler[], int compilers, char *flag[], int flags)
+{
+    // Website HEAD
+    #ifdef PRINTSITE
+    printf("<HTML><HEAD><TITLE><CENTER><H1>Compile Flag Benchmarks</H1></CENTER><B/HEAD><BODY>");
+
+    // INDEX
+    printf("<UL>");
+    for(i=0; i < compilers; i++)
+    {
+        printf("<LI><B><A HREF=\"#%s\">%s</A></B></LI><UL>",compiler[i],compiler[i]);
+        for(int e=0; e < flags, e++)
+        {
+             printf("<LI><B><A HREF=\"#%s\">%s</A></B></LI>",flag[e],flag[e]);
+        }
+        printf("</UL>");
+    }
+    printf("</UL>");
+
+    // BODY
+   
+    for(i=0; i < compilers; i++)
+    {
+        printf("<B><A HREF=\"#%s\">%s</A></B><UL>",compiler[i],compiler[i]);
+        for(int e=0; e < flags, e++)
+        {
+             printf("<H2><A HREF=\"#%s\">%s</A></H2>",flag[e],flag[e]);
+             printf("<B><IMG SRC=\"%s.png\">%s</A></B>",graphfile[e],graphfile[e]);
+             printf("<P><B><!--#include file=\"%s.html\" --></B></P>",datafile[e],datafile[e]);
+        }
+        
+    }
+
+    // FOOT
+    printf("<FOOTER>Author: Kevin Macey</FOOTER></BODY></HTML>");
+    #endif
+
+}
+
+#endif
+
 #ifdef MAIN
 int main(int argc, char *argv[])
 {
