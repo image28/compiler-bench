@@ -66,8 +66,16 @@ __m256i _mm256_div_epi16 (const __m256i va, const u_int64_t b)
 #endif
 
 #ifdef COMPILE
-void compile(char *cmd, char *defines)
+void compile(char *compilerfile, char *defines)
 {
+    FILE *input;
+    if ((input=fopen(compilerfile,"rb+")) == NULL ) exit(-1);
+    /* read the compiler base string
+       read the rest of the file 
+       ( line seperated compiler flags to benchmark one by one 
+       or togetaher if on the same line) */
+    fclose(input);
+/*
     char compileline[65535];
 
     strcpy(compileline, COMPILER);
@@ -77,7 +85,7 @@ void compile(char *cmd, char *defines)
     strcat(compileline, " -o ");
     strcat(compileline, cmd);
 
-    system(compileline);
+    system(compileline);*/
 }
 #endif
 
@@ -107,8 +115,10 @@ void benchmark(char *cmd, int runs, char *defines, u_int64_t *results, u_int64_t
 #endif 
 
 #ifdef INFO
-    timestamp(&start,&digits);
-    printf("Starting at : %llu with %llu digits in the nanoseconds\n",start, digits);
+    struct timeval tv;
+    gettimeofday(&tv,NULL);
+    start=tv.tv_secs;
+    printf("Starting at : %llu\n",start);
 #endif
 
     for(i=0; i < runs; i=i+2)
@@ -226,7 +236,6 @@ void website(char *compiler[], int compilers, char *flag[], int flags)
     printf("</UL>");
 
     // BODY
-   
     for(i=0; i < compilers; i++)
     {
         printf("<B><A HREF=\"#%s\">%s</A></B><UL>",compiler[i],compiler[i]);
