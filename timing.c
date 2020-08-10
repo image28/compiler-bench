@@ -257,7 +257,6 @@ void website(char *compiler[], int compilers, char *flag[], int flags)
     #endif
 
 }
-
 #endif
 
 #ifdef MAIN
