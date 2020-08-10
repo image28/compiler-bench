@@ -17,11 +17,72 @@
 #include "gnuplot_pipes.h"
 #include <stdlib.h>
 #include <sys/time.h>
+#include <dirent.h>
 #endif
 
 #ifdef MATHMACROS
 #define ADD(a,b) (a+b)
 #define DIV(a,b) (a/b)
+#endif
+
+#ifdef COMPILEDCONFIGS
+typedef struct defines
+{
+    u_int64_t length;
+    u_int8_t define[];
+};
+
+typedef struct config
+{
+    u_int64_t defcount;
+    u_int8_t *binary;
+    u_int8_t *outprefix;
+    u_int8_t *baseparams;
+    struct define defines[];
+};
+
+void cacheconfig(char *configfile)
+{
+    u_int8_t *data;
+    u_int64_t definecount=0
+    u_in64_t *lengths;
+    u_int64_t pos=0;
+
+    if ( (input=fopen(dir->d_name,"r+") ) == NULL ) exit(-1);
+    fseek(input,0L,SEEK_END);
+    filesize=ftell(input);
+    fseek(input,0L,SEEK_SET);
+    data=calloc(filesize,1);
+    fread(data,1,filesize,input);
+    fclose(input);
+    input='\0';
+
+    definecount=(u_int64_t)*(data+0);
+    length[0]=(u_int64_t)*(data+11);
+    pos=19;
+    for(i=1; i < definecount; i++)
+    {
+        length[i]=*(data+pos);
+        pos=pos+8+length[i];
+    }
+
+    struct config *configfile;
+    configfile=malloc(pos);
+    configfile=(struct config)*(data);
+
+    FILE output;
+    char outfile[65535];
+    strcpy(outfile,configfile);
+    strcat(outfile,".cache");
+    output=fopen(outfile,"wb+");
+    frwite((u_int8_t*(configfile)),1,pos,output);
+    fclose(output);
+    free(data);
+    free(configfile);
+    configfile='\0';
+    output='\0';
+    data='\0';
+}
 #endif
 
 #ifdef TIMESTAMP
@@ -65,8 +126,41 @@ __m256i _mm256_div_epi16 (const __m256i va, const u_int64_t b)
 }
 #endif
 
+#ifdef MULTIBENCH
+void compileall()
+{
+    int e=0;
+    DIR *dp;
+    struct dirent *configs;
+    dp = opendir(CONFIGDIR);
+    char *compiler[];
+    char *define[];
+    int current=0;
+    FILE input='\0';;
+
+  
+    if ( dp )
+    {
+        while ((configs = readdir(dp)) != NULL)
+        {
+            
+
+
+            for(e=0; e < defines; e++)
+            {
+                compile(&compiler[current], define[])
+            }
+
+            free(config);
+            config='\0';
+            current++;
+        }
+    }
+}
+#endif
+
 #ifdef COMPILE
-void compile(char *compilerfile, char *defines)
+void compile(char *compilerfile,  char *defines[])
 {
     FILE *input;
     if ((input=fopen(compilerfile,"rb+")) == NULL ) exit(-1);
