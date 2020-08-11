@@ -7,6 +7,7 @@
     #define AVXMATH 1
     #define INFO 1
     #define BENCH 1
+    #define COMPILEDCONFIGS 1
     //#define COMPILE
 #endif
 
@@ -14,7 +15,8 @@
 #include <sys/types.h>
 #include <immintrin.h>
 #include <inttypes.h>
-#include "gnuplot_pipes.h"
+#include "libs/gnuplot_pipes/gnuplot_pipes.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>
 #include <dirent.h>
@@ -26,7 +28,7 @@
 #endif
 
 #ifdef COMPILEDCONFIGS
-typedef struct defines
+typedef struct define
 {
     u_int64_t length;
     u_int8_t define[];
@@ -41,14 +43,17 @@ typedef struct config
     struct define defines[];
 };
 
-void cacheconfig(char *configfile)
+void cacheconfig(char *infile)
 {
+    FILE *input;
     u_int8_t *data;
-    u_int64_t definecount=0
-    u_in64_t *lengths;
+    u_int64_t definecount=0;
+    u_int64_t *lengths;
     u_int64_t pos=0;
+    u_int64_t filesize=0;
+    u_int64_t i=0;
 
-    if ( (input=fopen(dir->d_name,"r+") ) == NULL ) exit(-1);
+    if ( (input=fopen(infile,"r+") ) == NULL ) exit(-1);
     fseek(input,0L,SEEK_END);
     filesize=ftell(input);
     fseek(input,0L,SEEK_SET);
@@ -58,30 +63,31 @@ void cacheconfig(char *configfile)
     input='\0';
 
     definecount=(u_int64_t)*(data+0);
-    length[0]=(u_int64_t)*(data+11);
+    lengths=calloc(definecount,8);
+    lengths[0]=(u_int64_t)*(data+11);
     pos=19;
     for(i=1; i < definecount; i++)
     {
-        length[i]=*(data+pos);
-        pos=pos+8+length[i];
+        lengths[i]=*(data+pos);
+        pos=pos+8+lengths[i];
     }
 
     struct config *configfile;
     configfile=malloc(pos);
-    configfile=(struct config)*(data);
+    configfile=(struct config*)(data);
 
-    FILE output;
+    FILE *output;
     char outfile[65535];
-    strcpy(outfile,configfile);
+    strcpy(outfile,infile);
     strcat(outfile,".cache");
     output=fopen(outfile,"wb+");
-    frwite((u_int8_t*(configfile)),1,pos,output);
+    fwrite((u_int8_t*)configfile,1,pos,output);
     fclose(output);
     free(data);
     free(configfile);
-    configfile='\0';
-    output='\0';
-    data='\0';
+    configfile=NULL;
+    output=NULL;
+    data=NULL;
 }
 #endif
 
@@ -211,7 +217,7 @@ void benchmark(char *cmd, int runs, char *defines, u_int64_t *results, u_int64_t
 #ifdef INFO
     struct timeval tv;
     gettimeofday(&tv,NULL);
-    start=tv.tv_secs;
+    start=tv.tv_sec;
     printf("Starting at : %llu\n",start);
 #endif
 
