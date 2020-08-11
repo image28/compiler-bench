@@ -8,7 +8,7 @@ Work in progress ( started ~7th-8th August 2020 )
 <B>Compile options</B><BR>
 <TABLE>
 <UL>
-<TR>-<TD><LI>--DALLIN</TD><TD>Compiles with all flags ( eventually )</LI></TD></TR>
+<TR>-<TD><LI>-DALLIN</TD><TD>Compiles with all flags ( eventually )</LI></TD></TR>
 <TR>-<TD><LI>-DCOMPILEDCONFIGS 1</TD><TD>Compiles with cached/compiled config files support</LI></TD></TR>
 <TR>-<TD><LI>-DWEBSITE</TD><TD>enable generation of website</LI></TD></TR>
 <TR>-<TD><LI>-DPRINTSITE</TD><TD>print the website to stdout</LI></TD></TR>
