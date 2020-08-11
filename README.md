@@ -14,7 +14,7 @@ gcc timing.c [compiler options] -mavx2 -lm -Ofast -o timing<BR>
 <TABLE>
 <UL>
 <TR>-<TD><LI>-DALLIN</TD><TD>Compiles with all flags ( eventually )</LI></TD></TR>
-<TR>-<TD><LI>-DCOMPILEDCONFIGS</TD><TD>Compiles with cached/compiled config files support</LI></TD></TR>
+<TR>-<TD><LI>-DCACHECONFIGS</TD><TD>Compiles with cached/compiled config files support</LI></TD></TR>
 <TR>-<TD><LI>-DWEBSITE</TD><TD>enable generation of website</LI></TD></TR>
 <TR>-<TD><LI>-DPRINTSITE</TD><TD>print the website to stdout</LI></TD></TR>
 <TR>-<TD><LI>-DCOMPILER</TD><TD>set the compiler to test (e.g gcc,g++)</LI></TD></TR>
