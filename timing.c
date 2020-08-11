@@ -7,7 +7,7 @@
     #define AVXMATH 1
     #define INFO 1
     #define BENCH 1
-    #define COMPILEDCONFIGS 1
+    #define CACHECONFIGS 1
     //#define COMPILE
 #endif
 
@@ -27,7 +27,7 @@
 #define DIV(a,b) (a/b)
 #endif
 
-#ifdef COMPILEDCONFIGS
+#ifdef CACHECONFIGS
 typedef struct define
 {
     u_int64_t length;
