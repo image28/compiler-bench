@@ -5,6 +5,11 @@ Work in progress ( started ~7th-8th August 2020 )
 <BR>
 <HR>
 <BR>
+compile with<BR>
+gcc timing.c [compiler options] -mavx2 -lm -Ofast -o timing<BR>
+<BR>
+<HR>
+<BR>
 <B>Compile options</B><BR>
 <TABLE>
 <UL>
